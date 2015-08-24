@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Product_Template</title>
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="./parallax.js-1.3.1/parallax.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="owl-carousel/owl.theme.css">
+  <script src="./owl-carousel/owl.carousel.js"></script>
+  <link rel="import" href="top.html">
+</head>
+<script>
+        var righttext;
+        var lefttext;
+        var imgright;
+        var imgleft;
+        var imgright2;
+        var imgleft2;
+        var imgright3;
+        var imgleft3;
+
+
+        var link = document.querySelector('link[rel="import"]');
+        link.addEventListener('load', function(e) {
+            var importedDoc = link.import;
+        });
+
+        console.log(importedDoc);
+
+
+        document.querySelector('.top').appendChild(importedDoc);
+
+
+
+        $(document).ready(function(){
+            $('.parallax-window').parallax({imageSrc: './image/bg_01.jpg'});
+            
+            $('.open').children('ul').slideDown();
+            $('#foot li.has-sub>a').on('click', function(){
+                $(this).removeAttr('href');
+                var element = $(this).parent('li');
+
+                if (element.hasClass('open')) {
+                    element.removeClass('open');
+                    element.find('ul').slideUp();
+                    console.log('slideup now');
+                }
+                else {
+                    element.addClass('open');
+                    element.children('ul').slideUp(0).slideDown();
+                    element.siblings('li').children('ul').slideUp();
+                    element.siblings('li').removeClass('open');
+                    element.siblings('li').find('ul').slideUp();
+                }   
+            });
+
+            $("#owl-demo").owlCarousel({
+              items : 1,
+              itemsDesktop : [1199,1],
+              itemsDesktopSmall : [979,1],
+              itemsTablet: [768,1],
+              itemsTabletSmall: false,
+              itemsMobile : [479,1],
+              singleItem : false,
+              itemsScaleUp : false,
+            });
+            var owl = $("#owl-demo");
+            owl.owlCarousel();
+
+            $('.inlineimg div').hover(function() {
+                $(this).children('.inline_text_full').addClass('hover');
+                $(this).children('.inline_text_full').removeClass('nonehover');
+                $(this).children('.inline_text').removeClass('hover');
+                $(this).children('.inline_text').addClass('nonehover');
+            },function(){
+                $(this).children('.inline_text_full').removeClass('hover');
+                 $(this).children('.inline_text_full').addClass('nonehover');
+                $(this).children('.inline_text').addClass('hover');
+                 $(this).children('.inline_text').removeClass   ('nonehover');
+            });
+
+            $('.six').hover(function() {
+                $(this).children('.append_top').addClass('hover');
+                $(this).children('.append_top').removeClass('nonehover');
+            },function(){
+                $(this).children('.append_top').removeClass('hover');
+                $(this).children('.append_top').addClass('nonehover');
+            });
+
+            $('.choose_six').hover(function(){
+                var text = $(this).children('img').attr('src');
+                var text2 = text.replace("or", "over");
+                $(this).children('img').attr('src', text2);
+            },function(){
+                var text = $(this).children('img').attr('src');
+                var text2 = text.replace("over","or");
+                $(this).children('img').attr('src', text2);
+            });
+
+            $('.resource_inside div').hover(function(){
+                var text = $(this).children('img').attr('src');
+                var text2 = text.replace("or","over");
+                $(this).children('img').attr('src', text2);
+            },function(){
+                var text = $(this).children('img').attr('src');
+                var text2 = text.replace("over","or");
+                $(this).children('img').attr('src', text2);
+            });
+        });
+
+        $(window).load(function(){
+            var width = window.outerWidth;
+            righttext = document.getElementById('insideright').innerHTML;
+            lefttext = document.getElementById('insideleft').innerHTML;
+
+            imgright = document.getElementById('imgright_right').innerHTML;
+            imgleft = document.getElementById('imgright_left').innerHTML;
+
+            imgright2 = document.getElementById('imgright_right2').innerHTML;
+            imgleft2 = document.getElementById('imgright_left2').innerHTML;
+
+            // imgright3 = document.getElementById('imgright_right3').innerHTML;
+            // imgleft3 = document.getElementById('imgright_left3').innerHTML;
+            resizefunc();
+        });
+
+		function resizefunc(){
+            scrolldetect();
+            var width = window.outerWidth;
+            if(width <= 1007) {
+                $('#insideright').empty();
+                $('#insideright').append(lefttext);
+                $('#insideleft').empty();
+                $('#insideleft').append(righttext);
+
+                $('#imgright_right').empty();
+                $('#imgright_right').append(imgleft);
+                $('#imgright_left').empty();
+                $('#imgright_left').append(imgright);
+
+                $('#imgright_right2').empty();
+                $('#imgright_right2').append(imgleft2);
+                $('#imgright_left2').empty();
+                $('#imgright_left2').append(imgright2);
+
+                // $('#imgright_right3').empty();
+                // $('#imgright_right3').append(imgleft3);
+                // $('#imgright_left3').empty();
+                // $('#imgright_left3').append(imgright3);
+            }
+
+            else {
+                $('#insideright').empty();
+                $('#insideright').append(righttext);
+                $('#insideleft').empty();
+                $('#insideleft').append(lefttext);
+
+                $('#imgright_right').empty();
+                $('#imgright_right').append(imgright);
+                $('#imgright_left').empty();
+                $('#imgright_left').append(imgleft);
+
+                $('#imgright_right2').empty();
+                $('#imgright_right2').append(imgright2);
+                $('#imgright_left2').empty();
+                $('#imgright_left2').append(imgleft2);
+
+                // $('#imgright_right3').empty();
+                // $('#imgright_right3').append(imgright3);
+                // $('#imgright_left3').empty();
+                // $('#imgright_left3').append(imgleft3);
+
+                var right_top = $(".inside_right").height();
+                var intro_height = $('#introimg').height();
+                var a = (right_top-intro_height)/2;
+                $('#introimg').css({
+                    "top": a,
+                    "position":'absolute'
+                });
+            }
+            //footer
+			if(width < 783){
+				$('.footer').empty();
+            	var text = '<div class="foot" id="foot"><ul><li class="about has-sub"><a href="#"><button type="button" class="btn btn-default">About Product</button></a><ul><li><a href="#" onclick="defaultMenu(\'1-1\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'1-2\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'1-3\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'1-4\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'1-5\');"><button type="button" class="btn btn-default">Test</button></a></li></ul></li><li class="training has-sub"><a href="#"><button type="button" class="btn btn-default">Training & Support</button></a><ul><li><a href="#" onclick="defaultMenu(\'2-1\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'2-2\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'2-3\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'2-4\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'2-5\');"><button type="button" class="btn btn-default">Test</button></a></li></ul></li><li class="content has-sub"><a href="#"><button type="button" class="btn btn-default">Content Resources</button></a><ul><li><a href="#" onclick="defaultMenu(\'3-1\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'3-2\');"><button type="button" class="btn btn-default">Test</button></a></li></ul></li><li class="community has-sub"><a href="#"><button type="button" class="btn btn-default">Community</button></a><ul><li><a href="#" onclick="defaultMenu(\'4-1\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'4-2\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'4-3\');"><button type="button" class="btn btn-default">Test</button></a></li><li><a href="#" onclick="defaultMenu(\'4-4\');"><button type="button" class="btn btn-default">Test</button></a></li></ul></li></ul></div>';     	
+            	$('.footer').append(text);
+            }
+
+            else {
+            	$('.footer').empty();
+            	var text = '<div class="col-lg-3 col-md-3 col-sm-3"><h4>About Product</h4><p>This is a test</p><p>This is a test</p><p>This is a test</p><p>This is a test</p><p>This is a test</p></div><div class="col-lg-3 col-md-3 col-sm-3"><h4>Training & Support</h4><p>This is a test</p><p>This is a test</p><p>This is a test</p><p>This is a test</p><p>This is a test</p></div><div class="col-lg-3 col-md-3 col-sm-3"><h4>Content Resorces</h4><p>This is a test</p><p>This is a test</p></div><div class="col-lg-3 col-md-3 col-sm-3"><h4>Community</h4><p>This is a test</p><p>This is a test</p><p>This is a test</p><p>This is a test</p></div>';
+            	$('.footer').append(text);
+            }
+
+            if(width<=783){
+                var h = $('.six img').height();
+                var h6 = h*6;
+                $('.img_six').css({
+                    "height": h6
+                });
+            }
+
+            else if(width > 1815){
+                $('.img_six').css({
+                    "height": '800'
+                });
+            }
+
+            else {
+                $('.img_six').css({
+                    "height": '650'
+                });
+            }
+
+            if(width >= 993){
+                var inlineh = document.getElementById('inline1').offsetHeight;
+                $('.inline_img').css({
+                    "height":inlineh
+                });
+            }
+            else{
+                var inlineh = document.getElementById('inline1').offsetHeight;
+                var inlineh2 = inlineh * 2 + 30;
+                $('.inline_img').css({
+                    "height": inlineh2
+                });
+            }
+
+            $('#foot li.has-sub>a').on('click', function(){
+            	$(this).removeAttr('href');
+			    var element = $(this).parent('li');
+
+			    if (element.hasClass('open')) {
+			        element.removeClass('open');
+			        element.find('ul').slideUp();
+			        console.log('slideup now');
+			    }
+			    else {
+			        element.addClass('open');
+			        element.children('ul').slideUp(0).slideDown();
+			        element.siblings('li').children('ul').slideUp();
+			        element.siblings('li').removeClass('open');
+			        element.siblings('li').find('ul').slideUp();
+			    }   
+			});
+    	}
+
+	function defaultMenu(index) {
+        //====start====
+        $('#foot ul li:first').removeClass('open');
+        $('#foot ul li:first ul li').removeClass('open');
+        $('.training').removeClass('open');
+        $('.training ul li').removeClass('open');
+        $('.content').removeClass('open');
+        $('.content ul li').removeClass('open');
+        $('.community').removeClass('open');
+        $('.community ul li').removeClass('open');
+        //====End====
+        switch (index) {
+            case '1-1':
+                $('#foot ul li:first').addClass('open');
+                $('#foot ul li:first ul li:first').addClass('open');
+                break;
+            case '1-2':
+                $('#foot ul li:first').addClass('open');
+                $('#foot ul li:first ul li:eq(1)').addClass('open');
+                break;
+            case '1-3':
+                $('#foot ul li:first').addClass('open');
+                $('#foot ul li:first ul li:eq(2)').addClass('open');
+                break;
+            case '1-4':
+                $('#foot ul li:first').addClass('open');
+                $('#foot ul li:first ul li:eq(3)').addClass('open');
+                break;
+            case '1-5':
+                $('#foot ul li:first').addClass('open');
+                $('#foot ul li:first ul li:eq(4)').addClass('open');
+                break;
+
+            case '2-1':
+                $('.training').addClass('open');
+                $('.training ul li:eq(0)').addClass('open');
+                break;
+            case '2-2':
+                $('.training').addClass('open');
+                $('.training ul li:eq(1)').addClass('open');
+                break;
+            case '2-3':
+                $('.training').addClass('open');
+                $('.training ul li:eq(2)').addClass('open');
+                break;
+            case '2-4':
+                $('.training').addClass('open');
+                $('.training ul li:eq(3)').addClass('open');
+                break;
+            case '2-5':
+                $('.training').addClass('open');
+                $('.training ul li:eq(4)').addClass('open');
+                break;
+
+            case '3-1':
+                $('.content').addClass('open');
+                $('.content ul li:eq(0)').addClass('open');
+                break;
+            case '3-2':
+                $('.content').addClass('open');
+                $('.content ul li:eq(1)').addClass('open');
+                break;
+            
+            case '4-1':
+                $('.community').addClass('open');
+                $('.community ul li:eq(0)').addClass('open');
+                break;
+            case '4-2':
+                $('.community').addClass('open');
+                $('.community ul li:eq(1)').addClass('open');
+                break;
+            case '4-3':
+                $('.community').addClass('open');
+                $('.community ul li:eq(2)').addClass('open');
+                break;
+            case '4-4':
+                $('.community').addClass('open');
+                $('.community ul li:eq(3)').addClass('open');
+                break;
+            default:
+                break;
+        }
+    }
+
+    function roll_down(input){
+        switch(input){
+          case 1:
+            var x = $("#feature").offset().top;
+            $('html, body').animate({
+              scrollTop: (x-105)}, 2000);
+            break;
+
+          case 2:
+            var x = $("#addon").offset().top;
+            $('html, body').animate({
+              scrollTop: (x-105)}, 2000);
+            break;
+
+          case 3:
+            var x = $("#review").offset().top;
+            $('html, body').animate({
+              scrollTop: (x-105)}, 2000);
+            break;
+
+          case 4:
+            var x = $("#resources").offset().top;
+            $('html, body').animate({
+              scrollTop: (x-105)}, 2000);
+          default:
+            break;
+        }
+    }
+
+    function scrolldetect(){
+        var width = window.outerWidth;
+        var menu = document.getElementById("menu");
+        var menu_y = getPosition(menu);
+        if(menu_y <= 0){
+          if(width > 1000){
+            document.getElementById("top_wrap").style.display = "block";
+          }
+          else {
+            document.getElementById("top_wrap").style.display = "none";
+          }
+        }
+        else {
+            document.getElementById("top_wrap").style.display = "none";
+        }
+    }
+    function getPosition(element) {
+        var yPosition = 0;
+      
+        while(element) {
+            yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+            element = element.offsetParent;
+        }
+        return  yPosition;
+    }
+		
+</script>
+<body onresize="resizefunc()" onscroll="scrolldetect()" id="body">
+    <div class="top_wrapper" style="display:none" id="top_wrap">
+        <div class="wrapper_middle">
+            <img src="./image/Menu_Features-logo.png">
+            <a href="#" onclick="roll_down(1)" id="top_f" style="text-decoration:none;"><span>Features</span></a>
+            <a href="#" onclick="roll_down(2)" id="top_add" style="text-decoration:none;"><span>Add-ons</span></a>
+            <a href="#" onclick="roll_down(3)" id="top_rev" style="text-decoration:none;"><span>Review</span></a>
+            <a href="#" onclick="roll_down(4)" id="top_res" style="text-decoration:none;"><span>Resource</span></a>
+            <div class="wrapperbtn">
+            <button type="button" class="btn btn-default">BUY NOW</button>
+            <button type="button" class="btn btn-default">Download</button>
+            </div>
+        </div>
+    </div>
+  
+<div id="down_wrap">
+    <div class="top"></div>
+    <div class="banner" style="background:url('./image/main-header-w2000px.jpg');background-repeat:no-repeat;background-position:40% 40%;background-size: 1903px 1070px;-webkit-filter: brightness(0.5);">
+        <img src="./image/main-header-w2000px.jpg" class="mainimg" style="opacity:0;">
+        <img src="./image/main-header-logo.png" class="titleimg">
+        <img src="./image/main-header-logolist.png" class="logolist">
+        <div class="banner_text">
+            <p>The 3D Animation Software that Every Artist can Master</p>
+        </div>
+    </div>
+    <div class="menu_back" id="menu">
+        <div class="menu_top">
+            <div id="insideleft">
+                <div class="inside_left col-lg-7 col-md-6 col-sm-12 col-xs-12">
+                <div class="top_decoration">
+                    <p style="font-family:Open Sans Semibold">iClone 6 Real-Time 3D Animation Perfection</p>
+                </div>
+                <p>iClone is designed for instant 3D visualization and digital storytelling.iClone is designed for instant 3D visualization and digital storytelling.iClone is designed for instant 3D visualization and digital storytelling.iClone is designed for instant 3D visualization and digital storytelling.iClone is designed for instant 3D visualization and digital storytelling.iClone is designed for instant 3D visualization and digital storytelling.</p>
+                </div>
+            </div>
+            
+            <div id="insideright">
+            <div class="inside_right col-lg-5 col-md-6 col-sm-12 col-xs-12">
+                <img src="./image/Introduction-video.jpg" class="introvideo" id="introimg">
+                <img src="./image/Introduction-video-icon.png" class="introicon" id="introsmall">
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="feature" class="set_group parallax-window" data-parallax="scroll" data-image-src="./image/bg_01.jpg">
+        <p>FEATURES</p>
+    </div>
+
+    <div class="product_detail_imgright">
+        <div class="imgright_back">
+        <div class="imgright_top">
+            <p style="font-family:Open Sans Semibold">Authentic Motions that Breathe Life into Characters</p>
+        </div>
+        <div class="imgright_middle">
+            <div id="imgright_left">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="detail_definition_left">
+                    <ul>
+                       <li>Facial animation with advanced puppeteering, auto lip=syncing, and motion key editing.</li>
+                       <li>HumanIK body animation control and motion layer editing.</li>
+                       <li>Instant performances with Persona characteristics(personality & emotion).</li>
+                       <li>Hundreds of animations included and readied to be used,thousands more abailable in the store.</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div id="imgright_right">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="detail_img">
+                    <img src="./image/Authentic_motion.png">
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="imgright_btm">
+            <button type="button" class="btn btn-default"> Learn more</button>
+        </div>
+        </div>
+    </div>
+    
+
+    <div class="inline_img">
+        <div class="inlineimg">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 left" id="inline1">
+            <img src="./image/Character-Creation-w783xh460.jpg">
+            
+            <div class="inline_text hover">
+                <p>Character Creation</p>
+            </div>
+
+            <div class="inline_text_full nonehover">
+                <div class="inline_title">
+                    <p>Character Creation</p>
+                </div>
+                
+                <p>Generate Millions of unique characters with incredible facial and body details that are ready for natural-looking animations.They are real-time ffriendly and can also interact realistically with physics enabled objects</p>
+
+                <div class="inlinebtn">
+                <button type="button" class="btn btn-default">Learn more</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 right" id="inline2">
+            <img src="./image/Modular-Stage-w783xh460.jpg">
+            <div class="inline_text hover">
+                <p>Modular Stage</p>
+            </div>
+
+            <div class="inline_text_full nonehover">
+                <div class="inline_title">
+                    <p>Modular Stage</p>
+                </div>
+                
+                <p>create Stunning, living & breathing environments by simply dragging in terrain,water,vegetation,and buliding bloocks. Trees sways, clouds drift, amd sun rises and sets naturally, just like the real world</p>
+
+                <div class="inlinebtn">
+                <button type="button" class="btn btn-default">Learn more</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+
+    <div class="product_detail_imgright">
+        <div class="imgright_back">
+        <div class="imgright_top">
+            <p style="font-family:Open Sans Semibold">Real-time Production Instant Results Right Before Your Eyes</p>
+        </div>
+        <div class="imgright_middle">
+            <div id="imgright_left2">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="detail_definition_left">
+                    <ul>
+                       <li>Director-oriented layout:Actor, Prop,Scene,Animation,SFX.</li>
+                       <li>Intuitive dockable UI with various workspace adjustments.</li>
+                       <li>Scenes are built with dran-n-drop with convenient in-screen editing.</li>
+                       <li>Optimized Content Manager with quick search,content pack view, folder creation,and online inventory.</li>
+                       <li>Timeline enhancements with dope sheet, multi-track editing,and zoom view.</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div id="imgright_right2">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="detail_img">
+                    <img src="./image/Real-time-Production-w890x360.png">
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="imgright_btm">
+            <button type="button" class="btn btn-default"> Learn more</button>
+        </div>
+        </div>
+    </div>
+
+   <div class="inline_img">
+        <div class="inlineimg">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 left" id="inline3">
+            <img src="./image/Visual-Effects-w783xh460px.jpg">
+            <div class="inline_text hover">
+                <p>Visual Effects</p>
+            </div>
+
+            <div class="inline_text_full nonehover">
+                <div class="inline_title">
+                    <p>Visual Effects</p>
+                </div>
+                
+                <p>Add a little pizzazz to your scene with various shaders,post effects and real-time particles such as smoke, fire and explosion effects.</p>
+
+                <div class="inlinebtn">
+                <button type="button" class="btn btn-default">Learn more</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 right" id="inline4">
+            <img src="./image/Camera-&-Light-w783xh460px.jpg">
+            <div class="inline_text hover">
+                <p>Camera & Light</p>
+            </div>
+
+            <div class="inline_text_full nonehover">
+                <div class="inline_title">
+                    <p>Camera & Light</p>
+                </div>
+                
+                <p>Quickly set up a shooting scene with duplicable light props featuring flash & dimer controls, and live-switchable camera systems that come with various real-world camera lens options like DOF.</p>
+
+                <div class="inlinebtn">
+                <button type="button" class="btn btn-default">Learn more</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="product_detail_imgright">
+        <div class="imgright_back" style="background-image:url('./image/Physics-Simulation-w890x360.png');background-repeat: no-repeat;background-position:35% 25%;background-size:80% 80%;">
+        <div class="imgright_top">
+            <p style="font-family:Open Sans Semibold">Physics Simulation</p>
+        </div>
+        <div class="imgright_middle">
+            <div id="imgright_left3">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="detail_definition_left">
+                    <ul>
+                       <li>Easily define smooth cloth transitions with grayscale maps.</li>
+                       <li>Apply natural wind behaviors to skirts and hair.</li>
+                       <li>Design sophisticated physics structure with the Visual Constraint tools.</li>
+                       <li>Add Rotational and Directional Forces to physically animate objects.</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div id="imgright_right3">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="detail_img">
+                    <!-- <img src="./image/Physics-Simulation-w890x360.png"> -->
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="imgright_btm">
+            <button type="button" class="btn btn-default"> Learn more</button>
+        </div>
+        </div>
+    </div>
+
+    <div class="inline_img">
+        <div class="inlineimg">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 left" id="inline5">
+            <img src="./image/Render-&-Output-w783xh460px.jpg">
+            <div class="inline_text hover">
+                <p>Render & Output</p>
+            </div>
+            <div class="inline_text_full nonehover">
+                <div class="inline_title">
+                    <p>Render & Output</p>
+                </div>
+                
+                <p>Multiple output render modes that support popular image and video formats. Renders can also be easily used for video compositions by exporting image sequences with alpha channel.</p>
+
+                <div class="inlinebtn">
+                <button type="button" class="btn btn-default">Learn more</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 right" id="inline6">
+            <img src="./image/Dynamic-Materials-w783xh460px.jpg">
+            <div class="inline_text hover">
+                <p>Dynamic Materials</p>
+            </div>
+
+            <div class="inline_text_full nonehover">
+                <div class="inline_title">
+                    <p>Dynamic Materials</p>
+                </div>
+                
+                <p>Next gen, multi-channel textures that give characters and props realistic visual appearances. Dynamically change the look of the materials on the spot for instant visual feedback.</p>
+
+                <div class="inlinebtn">
+                <button type="button" class="btn btn-default">Learn more</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="product_detail_imgright specialimgright">
+        <div class="imgright_back">
+            <div class="imgright_top">
+                <p style="font-family:Open Sans Semibold">Complete Content Selections</p>
+            </div>
+            <div class="imgright_middle">
+                <div id="imgright_allleft">
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                    <div class="detail_definition_left two_img">
+                        <img src="./image/Complete-Content-Selections-logo-w510xh97-01.jpg">
+                        <div class="text">
+                        <p>Over 14,000 premium value packs professionally developed by Reallusionand highly skilled independent developers. Expand your library with character,motions,props,textures,and unique content collections for your scene.</p></div>
+                        <div class="visit">
+                        <p>Visit Store ></p></div>
+                        <img src="./image/Complete-Content-Selections-logo-w510xh97.jpg">
+                        <div class="text">
+                        <p>A robust community oriented market for you to discover. Over 340,000 3D assets created by our certified developers that you can try it out in iClone in real-time before you decide but.</p></div>
+                        <div class="visit">
+                        <p> Visit Marketplace > </p></div>
+                    </div>
+                </div>
+                </div>
+                <div id="imgright_allright">
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                    <div class="detail_img">
+                        <img src="./image/Complete-Content-Selections-w802x480.png">
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+    <div id="addon" class="set_group parallax-window" data-parallax="scroll" data-image="./image/bg_01.jpg">
+        <p>ADD-ON</p>
+    </div>
+
+    <div class="six-column info">
+        <div class="six_back">
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 six_left">
+                <div class="sixtitle">
+                <p style="font-family:Open Sans Semibold">Bring Your 3D Works to Life in iClone6</p>
+                </div>
+
+                <span>Streamline Your Production with 3DXchange6<br><p>3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.3DXchange is a robust.</p></span>
+                
+                <button type="button" class="btn btn-default"> Learn more</button>        
+    
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 six_right special">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="choose_six" id="six1"> 
+                        <img src="./image/Six-logo-01-or.jpg">
+                        <p>MAYA</p>
+                    </div>
+                    <div class="choose_six" id="six4">
+                        <img src="./image/Six-logo-04-or.jpg">
+                        <p>DAZ3D</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="choose_six" id="six2">
+                        <img src="./image/Six-logo-02-or.jpg">
+                        <p>3DSMAX</p>
+                    </div>
+                    
+                    <div class="choose_six" id="six5"> 
+                        <img src="./image/Six-logo-05-or.jpg">
+                        <p>3DWAREHOUSE</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="choose_six" id="six3">
+                        <img src="./image/Six-logo-03-or.jpg">
+                        <p>UNREAL</p>
+                    </div>
+                    <div class="choose_six" id="six6">   
+                        <img src="./image/Six-logo-06-or.jpg">
+                        <p>UNITY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu_text">
+        <div class="inside_menu">
+            <h3 style="font-family:Open Sans Semibold;font-size:2.625em;" >Power-up iClone6 with the Tools You know</h3>
+            <h5>this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.this is the test.</h5>
+        </div>
+    </div>
+
+    <div class="img_six addon_six" id="addon">
+      <div class="special_img">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="six">
+                <img src="./image/Six-boxbg-01.jpg">
+                <div class="append_top nonehover">
+                    <p>Create millions of unique characters with gorgeous facial and body details that are ready to be animated.</p>
+                </div>
+                <div class="append">
+                    <img src="./image/Six-boxor-h158px-01.png">
+                </div>
+              </div>
+              <div class="six">
+                <img src="./image/Six-boxbg-04.jpg">
+                <div class="append_top nonehover">
+                    <p>Create millions of unique characters with gorgeous facial and body details that are ready to be animated.</p>
+                </div>
+                <div class="append">
+                    <img src="./image/Six-boxor-h158px-04.png">
+                </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="six">
+                <img src="./image/Six-boxbg-02.jpg">
+                <div class="append_top nonehover">
+                    <p>Create millions of unique characters with gorgeous facial and body details that are ready to be animated.</p>
+                </div>
+                <div class="append">
+                    <img src="./image/Six-boxor-h158px-02.png">
+                </div>
+              </div>
+              <div class="six">
+                <img src="./image/Six-boxbg-05.jpg">
+                <div class="append_top nonehover">
+                    <p>Create millions of unique characters with gorgeous facial and body details that are ready to be animated.</p>
+                </div>
+                <div class="append">
+                    <img src="./image/Six-boxor-h158px-05.png">
+                </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="six">
+                <img src="./image/Six-boxbg-03.jpg">
+                <div class="append_top nonehover">
+                    <p>Create millions of unique characters with gorgeous facial and body details that are ready to be animated.</p>
+                </div>
+                <div class="append">
+                    <img src="./image/Six-boxor-h158px-03.png">
+                </div>
+              </div>
+              <div class="six" id="imgsix6">
+                <img src="./image/Six-boxbg-06.jpg">
+                <div class="append_top nonehover">
+                    <p>Create millions of unique characters with gorgeous facial and body details that are ready to be animated.</p>
+                </div>
+                <div class="append">
+                    <img src="./image/Six-boxor-h158px-06.png">
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    
+    <div id="review" class="set_group parallax-window" data-parallax="scroll" data-image="./image/bg_01.jpg">
+        <p>REVIEW</p>
+    </div>
+
+    <div class="container-fluid owl">
+  		<div id="owl-demo">   
+  		  <div class="item">
+            <div class="itemtop"><p>''</p></div>
+            <div class="itemtitle">
+                <p>"Initally we did use traditional storyboards with sketches to visualize screnes and angles.Initally we did use traditional storyboards with sketches to visualize screnes and angles."</p>
+            </div>
+            <img src="./image/Accolades-people-01.png" alt="Owl Image">
+            <p>Noguchi Loichi</p><p>Associate Department Manager<br><b>Toei Animation</b></p>
+          </div>
+          <div class="item">
+            <div class="itemtop"><p>''</p></div>
+            <div class="itemtitle">
+                <p>"Initally we did use traditional storyboards with sketches to visualize screnes and angles.Initally we did use traditional storyboards with sketches to visualize screnes and angles."</p>
+            </div>
+            <img src="./image/Accolades-people-02.png" alt="Owl Image">
+            <p>Noguchi Loichi</p><p>Associate Department Manager<br><b>Toei Animation</b></p>
+          </div>
+          <div class="item">
+            <div class="itemtop"><p>''</p></div>
+            <div class="itemtitle">
+                <p>"Initally we did use traditional storyboards with sketches to visualize screnes and angles.Initally we did use traditional storyboards with sketches to visualize screnes and angles."</p>
+            </div>
+            <img src="./image/Accolades-people-03.png" alt="Owl Image">
+            <p>Noguchi Loichi</p><p>Associate Department Manager<br><b>Toei Animation</b></p>
+          </div>
+          <div class="item">
+            <div class="itemtop"><p>''</p></div>
+            <div class="itemtitle">
+                <p>"Initally we did use traditional storyboards with sketches to visualize screnes and angles.Initally we did use traditional storyboards with sketches to visualize screnes and angles."</p>
+            </div>
+            <img src="./image/Accolades-people-04.png" alt="Owl Image">
+            <p>Noguchi Loichi</p><p>Associate Department Manager<br><b>Toei Animation</b></p>
+          </div>
+
+  		</div>
+	</div>
+
+    <div class="award_recogn" id="award">
+      <p>Awards and Recognitions</p>
+      <img src="./image/logo-list_01.png">;
+    </div>
+
+    <div id="resources" class="set_group parallax-window" data-parallax="scroll" data-image="./image/bg_01.jpg">
+        <p>RESOURECES</p>
+    </div>
+
+    <div class="relate_resource">
+        <div class="resource_inside">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <img src="./image/Accolades-threelogo-01-or.png">
+                <p>Product Roadmap<br>
+                <span>See what the future holds for iClone.We are constantly adding and improving features to provide a better user experience</span></p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <img src="./image/Accolades-threelogo-02-or.png">
+                <p>Product Roadmap<br>
+                <span>See what the future holds for iClone.We are constantly adding and improving features to provide a better user experience</span></p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <img src="./image/Accolades-threelogo-03-or.png">
+                <p>Product Roadmap<br>
+                <span>See what the future holds for iClone.We are constantly adding and improving features to provide a better user experience</span></p>
+            </div>
+        </div>
+    </div>
+	
+    <div class="buy" id="buy">
+        <div class="buy_inside">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                <div class="pipe">
+                    <div class="pipetitle">
+                        <span>iClone6 Pipeline
+                        <p>iClone 6 Pro, 3DXchange 6 Pipeline. Mocap Plugin Complete animation solution for solution production</p></span>
+                    </div>
+                    <img src="./image/buy-image-01.png">
+                    <p>The Complete pipeline to create.The Complete pipeline to create.The Complete pipeline to create.The Complete pipeline to create.</p>
+                    <button type="button" class="btn btn-default">Buy Now</button>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
+                <div class="pipe_right">
+                <div class="more_info">
+                    <div class="info_title">
+                    <p>iClone6 Standard</p>
+                    </div>
+                    <p>it's a test.it's a test.it's a test.it's a test.it's a test.it's a test.it's a test.it's a test.it's a test.it's a test.it's a test.</p>
+                    <button type="button" class="btn btn-default">Buy Now</button>
+                </div>
+
+                <div class="more_info icpro">
+                    <div class="info_title">
+                    <p>iClone6 Pro</p>
+                    </div>
+                    <p>it's a test.it's a test.it's a test.it's a test.it's a test.</p>
+                    <button type="button" class="btn btn-default">Buy Now</button>
+                </div>
+                </div>
+            </div>
+            <img src="./image/icon-arrow-01.png">
+        </div>
+    </div>
+	<div class="footer">
+	</div>	
+  </div>
+</body>
+
+</html>
